@@ -1,5 +1,5 @@
 const nacl = require('libsodium-wrappers')
-const Decryptor = require('../src/Decryptor.js')
+const Decryptor = require('../src/Decryptor')
 
 describe('decryption module', () => {
 
@@ -15,7 +15,6 @@ describe('decryption module', () => {
     nonce = nacl.randombytes_buf(nacl.crypto_secretbox_NONCEBYTES)
     ciphertext = nacl.crypto_secretbox_easy(msg, nonce, key)
   })
-
   it('needs a decryption key before it can decrypt', async () => {
     try {
       await Decryptor.decrypt(ciphertext, nonce)
@@ -25,7 +24,6 @@ describe('decryption module', () => {
     Decryptor.setKey(key)
     await Decryptor.decrypt(ciphertext, nonce) // should succeed
   })
-
   it('decrypts an encrypted message', async () => {
     expect(await Decryptor.decrypt(ciphertext, nonce)).toEqual(msg)
   })
