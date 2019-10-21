@@ -1,13 +1,13 @@
 const nacl=require('libsodium-wrappers');
 let key=null;
 //Assigns Key for decryption
-module.exports.setKey=async function setKey(newKey)
+exports.setKey=async function setKey(newKey)
 {
   key=newKey;
 }
-// Decrypts the function using the secret key
+// Decrypts the function using the key
 // => If no key is found the ciphertext can't be decrypted
-module.exports.decrypt=async function decrypt(ciphertext,nonce)
+exports.decrypt=async function decrypt(ciphertext,nonce)
 {
   if(key==null){
     throw 'no key';

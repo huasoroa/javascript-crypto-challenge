@@ -10,12 +10,11 @@ let loadLibsodium=async()=>await nacl.ready;
 })();
 
 //returns the publicKey
-module.exports.verifyingKey=async function verifyingKey(){
+exports.verifyingKey=async function verifyingKey(){
   await loadLibsodium();
   return keypair.publicKey;
 }
 //The private key is sometimes also called the signing key. The secret, or private, key is also called the signing key.
-module.exports.sign=async function sign(msg){
+exports.sign=async function sign(msg){
   return nacl.crypto_sign(msg,keypair.privateKey)
-
 }
